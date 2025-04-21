@@ -1,3 +1,97 @@
+# Instructivo para Ejecutar una Aplicación Next.js
+
+## Requisitos
+
+- Node.js (v18 o superior)
+- npm o yarn
+
+## Instalación
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/hacm1997/fintech-pro.git
+```
+
+2. Ingresa al directorio del proyecto:
+
+```bash
+cd tu-repo
+```
+
+3. Instala las dependencias:
+
+```bash
+npm install
+```
+
+_o si prefieres:_
+
+```bash
+yarn install
+```
+
+## Desarrollo
+
+Ejecuta el servidor de desarrollo:
+
+```bash
+npm run dev
+```
+
+_o:_
+
+```bash
+yarn dev
+```
+
+Abre tu navegador en:
+
+```
+http://localhost:3000
+```
+
+## Producción
+
+Compila la aplicación:
+
+```bash
+npm run build
+```
+
+Luego inicia el servidor en modo producción:
+
+```bash
+npm start
+```
+
+## Variables de Entorno
+
+Crea un archivo `.env` en la raiz del proyecto y agrega las variables necesarias:
+
+```env
+NEXT_PUBLIC_URL=http://localhost:3000
+```
+
+## Scripts Disponibles
+
+- `npm run dev` &rarr; Desarrollo
+- `npm run build` &rarr; Compilar para producción
+- `npm run start` &rarr; Ejecutar en producción
+
+## Notas
+
+- Si hay errores, elimina `node_modules` y `package-lock.json` o `yarn.lock` y reinstala.
+- Para actualizar paquetes:
+
+```bash
+npm update
+```
+
+## Listo
+
+¡La aplicación está lista para usarse! 🎉
+
 # Criterios de uso: TailwindCSS vs Styled Components en ProductDetails
 
 ## ᵀᴾ Criterios seguidos para diseñar la UI de productos financieros
