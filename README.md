@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Criterios de uso: TailwindCSS vs Styled Components en ProductDetails
 
-## Getting Started
+## ᵀᴾ Criterios seguidos para diseñar la UI de productos financieros
 
-First, run the development server:
+En el diseño de la UI para productos financieros, el enfoque principal fue **equilibrar rapidez de desarrollo, consistencia visual y escalabilidad**. La estructura buscó ser clara, reutilizable y pensada para crecer a medida que el proyecto escale.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Se priorizó una **navegación fácil** (Breadcrumbs) para que el usuario siempre pudiera volver rápidamente al catálogo.
+- El diseño transmitió **seriedad y confianza** usando paletas de colores sobrios (tonos grises, azul corporativo).
+- Se presentó la información **de manera jerárquica**, destacando lo más relevante (nombre, categoría, tipo, nivel de riesgo, tasa de interés).
+- El contenido fue diseñado para ser **responsivo** y legible en cualquier dispositivo.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 2. ᵀᴿ ¿Cómo se decidió cuándo usar Tailwind y cuándo Styled Components?
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Se aplicó el siguiente criterio:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Situación                                                       | ¿TailwindCSS? | ¿Styled Components? |
+| :-------------------------------------------------------------- | :------------ | :------------------ |
+| Estilos estáticos, fáciles de definir en clase                  | ✔️            |                     |
+| Encapsular un bloque de UI que pueda escalar o cambiar a futuro |               | ✔️                  |
+| Necesidad de pasar props dinámicos para cambiar estilos         |               | ✔️                  |
+| Lógica simple de condicionar clases (ej. color según riesgo)    | ✔️            |                     |
 
-## Learn More
+En el código:
 
-To learn more about Next.js, take a look at the following resources:
+- **Layout general** (`Section`, `Container`, `Card`, `Grid`) se encapsuló con **styled-components** para poder extenderlos o tematizarlos fácilmente.
+- **Títulos y párrafos** también se encapsularon como componentes para asegurar **consistencia visual**.
+- **Colores dinámicos** (como el `riskLevel`) se resolvieron directamente con clases de Tailwind, porque el cambio era sencillo y no justificaba sobrecomplicar.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> **Resumen**: Se usó `styled-components` para bloques estructurales y reutilizables, y Tailwind para estilos rápidos, simples o con lógica condicional ligera.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 3. ᵀᴽ ¿Qué se haría para escalar este proyecto a una app real de banca digital?
 
-## Deploy on Vercel
+- **Theming dinámico**: Usar un proveedor de temas en styled-components para cambiar colores, tamaños y tipografías según el "brand" del banco.
+- **Design System**: Formalizar los componentes (inputs, botones, cards, grids) en una librería interna.
+- **Internacionalización (i18n)**: Preparar el proyecto para soportar múltiples idiomas.
+- **Optimizar el performance**: Cargar data perezosamente (lazy loading) en componentes pesados como charts.
+- **Integración de accesibilidad (a11y)**: Asegurar contraste de colores, navegación por teclado, descripciones ARIA.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 4. ᵀᴼ ¿Qué herramientas se usarían para mejorar el rendimiento y monitoreo en producción?
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Sentry**: Para captura de errores en tiempo real.
+- **Datadog / New Relic**: Para monitorear el rendimiento del frontend (métricas de carga, errores de red).
+- **Vercel Analytics / Next.js Metrics**: Si el despliegue es en Vercel, aprovechar su monitoreo nativo.
+- **Lighthouse CI**: Para pruebas automáticas de performance y accesibilidad en cada despliegue.
+- **Bundle Analyzer**: Para identificar dependencias grandes y optimizar el peso de los bundles.
+
+---
+
+✨ **En resumen**, la estrategia de usar tanto `styled-components` como `TailwindCSS` permitió mantener el proyecto ágil para la fase actual, pero preparado para una escalabilidad de nivel enterprise.
