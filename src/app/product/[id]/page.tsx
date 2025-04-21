@@ -2,10 +2,6 @@ import MainLayout from "@/components/layout/main-layout";
 import { ProductDetails } from "@/components/product-details";
 import { Product } from "@/types/product";
 
-interface ProductPageProps {
-    params: { id: string };
-}
-
 /**
  * Fetches a single product by its ID from the API.
  * 
@@ -36,8 +32,8 @@ async function getProduct(id: string): Promise<Product> {
  * @param params - The route parameters containing the product ID.
  * @returns A React element displaying the product details.
  */
-export default async function ProductPage({ params }: ProductPageProps) {
-    const { id } = params;
+export default async function ProductPage({ params }: { params: Promise<Record<string, string>> }) {
+    const { id } = await params;
     const product = await getProduct(id);
 
     return (
