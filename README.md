@@ -2,7 +2,7 @@
 
 ## Aplicativo desplegado en Vercel
 
-`[(https://fintech-pro-two.vercel.app/)]`
+`(https://fintech-pro-two.vercel.app/)`
 
 ## Requisitos
 
